@@ -1,0 +1,334 @@
+.top-div{
+    width: auto;
+    height: 100px;
+    background-color: white;
+}
+.top-div h2{
+    float: left;
+}
+.top-div ul{
+    float: right;
+    margin-right: 50px;
+    margin-top: 30px;
+}
+
+ul .link{
+    margin: 5px;
+    padding: 6px;
+    text-decoration: none;
+    font-size: 18px;
+    color: blue;
+
+}
+.top-view{
+    width: auto;
+    height: 80vh;
+    background-color: antiquewhite;
+    /* background-image: url('./images/slide.jpg'); */
+    background-size: cover;
+}
+.logo-name{
+    margin-left: 20px;
+}
+.our-service{
+    margin-top: -20px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin: 30px; */
+    background-color: whitesmoke;
+    height: 300px;
+}
+.pr-head{
+    color: rgb(48, 47, 46);
+}
+.service-head{
+    font-size: 40px;
+    margin-top: 70px;
+    text-align: center;
+}
+.pr-lifestyle, .pr-loan, .pr-sell{
+    /* background-color: rgb(240, 191, 191); */
+    height: 150px;
+    width: 420px;
+    margin: 8px;
+    padding: 20px; 
+    text-align: center;
+    word-break: break-all;
+}
+.p-div{
+    width: 77%;
+    height: 80px;
+    margin: auto;
+    margin-top: 80px;
+    margin-bottom: 30px;
+    /* background-color: violet; */
+}
+.p-head {
+  font-size: 40px;  
+  float: left;
+  margin-left: 30px;
+  margin-top: 10px;
+}
+.all-p{
+    float: right;
+    font-size: 18px;
+   margin-right: 60px;
+    margin-top: 40px;
+}
+.properties{
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -15px;
+
+}
+.p-one, .p-two, .p-three,.p-four{
+    /* background-color: rgb(226, 122, 122); */
+    height: auto;
+    width: 90%;
+    margin: 8px;
+    padding: 5px; 
+    text-align: center;
+}
+.pr-img{
+    height: 500px;
+    width: 80%;
+
+}
+.p-word{
+    width: 80%;
+    word-break: break-all;
+    margin: auto;
+    text-align: center;
+    margin-top: 3px;
+}
+.p-one p, .p-two p, .p-three p{
+    display: inline-block;
+    /* margin-left: 20px; */
+    font-size: 14px;
+    margin-top: -5px;
+    margin: 6px;
+}
+.agents{
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -15px;
+
+}
+
+.a-one, .a-two, .a-three{
+    /* background-color: rgb(240, 191, 191); */
+    height: auto;
+    width: 300px;
+    margin: 8px;
+    padding: 5px; 
+    word-wrap: break-word;
+}
+.a-img{
+    height: 280px;
+    width: 100%;
+    background-size: cover;  
+}
+.a-one p, .a-two p, .a-three p{
+    display: inline-block;
+    margin: 2px;
+    padding: 2px;
+    font-size: 14px;
+}
+.blogs{
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -15px;
+    margin-bottom: 50px;
+
+}
+.blogs div{
+    /* background-color: rgb(240, 191, 191); */
+    height: 400px;
+    width: 400px;
+    margin: 8px;
+    padding: 5px; 
+    text-align: center;
+    word-break: break-all;
+}
+.bl-img{
+    width: 90%;
+    height: 300px;
+}
+.pg-footer{
+    width: auto;
+    height: 50px;
+    text-align: center;
+    /* margin-bottom: -100px; */
+    background-color: rgb(16, 20, 58);
+}
+
+.pg-last-p,.mid-p,.end-p{
+    display: inline-block;
+    margin: 10px;
+    margin-bottom: -10px;
+    color: white;
+    
+}
+
+@media (max-width:1300px) {
+    
+    .our-service{
+        background-color: whitesmoke;
+    }
+    .properties{
+        /* background-color: aqua; */
+        width:90%;
+        display: contents;
+        margin: auto;
+        padding: 5px; 
+    }
+    .p-one,.p-two,.p-three,.p-four{
+        width:80%;
+        margin: auto;
+        padding: 4px;
+        margin-bottom: 4px;
+        height: 600px;
+    }
+    .agents div{
+        width:50%;
+        margin: auto;
+        padding: 4px;
+        margin-bottom: 4px;
+        height: auto;  
+
+    }
+    .agents {
+        width:70%;
+        margin: auto;
+        padding: 5px;         
+    } 
+}
+
+@media (max-width:1200px) {
+    .our-service{
+        width:100%;
+        display: contents;
+        margin: auto;
+        padding: 5px; 
+        background-color: whitesmoke;
+    }
+    .pr-lifestyle,.pr-loan,.pr-sell{
+        width:40%;
+        margin: auto;
+        padding: 4px;
+        margin-bottom: 4px;
+        height: 200px;
+        
+    }
+
+    .all-p{
+        margin-top: 30px;
+    } 
+    .p-word p{
+        font-size: 13px;
+    }
+    .agents div{
+        width:30%;
+        margin: auto;
+        padding: 4px;
+        margin-bottom: 4px;
+        height: auto;  
+        /* background-color: black;       */
+    }
+    .agents {
+        /* background-color: aqua; */
+        width:70%;
+        /* display: contents; */
+        margin: auto;
+        padding: 5px;         
+    } 
+    .blogs {
+        width:90%;
+        display: contents;
+        margin: auto;
+        padding: 5px;         
+    }  
+    .blogs div{
+        width:60%;
+        margin: auto;
+        padding: 4px;
+        margin-bottom: 4px;
+        height: 400px;  
+        /* background-color: rgb(209, 196, 196);       */
+    }
+}
+@media (max-width:800px) {
+  
+    .our-service{
+        background-color: whitesmoke;
+        width: 100%;
+    }
+    .agents {
+        /* background-color: aqua; */
+        width:70%;
+        display: contents;
+        margin: auto;
+        padding: 5px;         
+    }  
+    .p-head{
+        margin-top: 20px;
+        font-size: 25px;
+    }
+    .all-p{
+        margin-top: 30px;
+        margin-right: 20px;
+        font-size: 15px;
+    }
+
+    .sl{
+        width: 100%;
+    }
+    
+    .the-img{
+        height: 600px;
+        width: auto;
+        background-size: cover;
+    }
+    .agents div{
+        width:40%;
+        margin: auto;
+        padding: 4px;
+        margin-bottom: 4px;
+        height: auto;  
+        /* background-color: black;       */
+    }
+    .p-word{
+        width: 90%;
+        word-break: break-all;
+        /* margin: auto; */
+        text-align: center;
+        /* background-color: aqua;    */
+    }
+    .p-word p{
+        font-size: 13px;
+    }
+    .blogs {
+        /* background-color: aqua; */
+        width:90%;
+        display: contents;
+        margin: auto;
+        padding: 5px;         
+    }  
+    .blogs div{
+        width:70%;
+        margin: auto;
+        padding: 4px;
+        margin-bottom: 4px;
+        height: 400px;  
+        /* background-color: rgb(192, 182, 182);       */
+    }
+}

@@ -1,0 +1,60 @@
+.form-div{
+    width: 80%;
+    padding: 10px;
+    margin: auto;
+    background-color: aliceblue;
+    text-align: center;
+}
+.all-div{
+    width: 60%;
+    text-align: center;
+    margin: auto;
+}
+.form-div input{
+    width: 50%;
+    padding: 10px;
+    margin: 8px;
+}
+.form-div textarea{
+    width: 51%;
+    height: 300px;
+}
+
+.submit{
+    background-color: rgb(9, 9, 94);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    border: transparent;
+}
+
+@media (max-width:1200px) {
+    .form-div{
+        width: 80%;
+        padding: 10px;
+        margin: auto;
+        background-color: rgb(37, 67, 94);
+        text-align: center;
+    }
+    .all-div{
+        width: 70%;
+        text-align: center;
+        margin: auto;
+    }
+    
+    .form-div input{
+        width: 60%;
+        padding: 10px;
+        margin: 8px;
+    }
+    .form-div textarea{
+        width: 61%;
+        height: 300px;
+    }
+    
+    .submit{
+        background-color: rgb(9, 9, 94);
+        color: white;
+        font-weight: bold;
+    } 
+}

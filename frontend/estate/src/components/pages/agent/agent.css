@@ -1,0 +1,135 @@
+.agent-container{
+
+    width: 70%;
+    height: auto;
+    margin: auto;
+    margin-top: 80px;
+    padding: 10px;
+    background-color: whitesmoke;
+}
+
+.agent-div{
+    width: 70%;
+    height: auto;
+    margin: auto;
+    margin-top: 30px;
+    padding: 10px;
+    /* background-color: rgb(116, 76, 24); */
+    align-items: center;
+    text-align: center;
+}
+.img-div{
+    width: 70%;
+    height: auto;
+    /* background-color: aqua; */
+    margin-top: 3px;
+}
+.img-div img {
+
+    width: 60%;
+    height: 400px;
+}
+
+.agent-info{
+    word-break: break-all;
+}
+
+.agent-info p {
+    display: inline-block;
+    padding: 6px;
+    margin: 3px;
+}
+
+@media (max-width:1400px) {
+    
+    .agent-container{
+
+        width: 90%;
+        height: auto;
+        margin: auto;
+        margin-top: 80px;
+        padding: 10px;
+        /* background-color: blue; */
+    }
+    .img-div{
+        width: 80%;
+        height: auto;
+        /* background-color: aqua; */
+        margin-top: 3px;
+    }
+    .img-div img {
+
+        width: 60%;
+        height: 350px;
+    }
+}
+
+@media (max-width:1200px) {
+    
+    .agent-container{
+
+        width: 90%;
+        height: auto;
+        margin: auto;
+        margin-top: 80px;
+        padding: 10px;
+        /* background-color: blue; */
+    }
+    .img-div{
+        width: 80%;
+        height: auto;
+        /* background-color: aqua; */
+        margin-top: 3px;
+    }
+    .img-div img {
+
+        width: 60%;
+        height: 350px;
+    }
+}
+@media (max-width:1000px) {
+    
+    .agent-container{
+
+        width: 90%;
+        height: auto;
+        margin: auto;
+        margin-top: 80px;
+        padding: 10px;
+        /* background-color: rgb(198, 198, 214); */
+    }
+    .img-div{
+        width: 80%;
+        height: auto;
+        /* background-color: aqua; */
+        margin-top: 3px;
+    }
+    .img-div img {
+
+        width: 60%;
+        height: 300px;
+    }
+}
+@media (max-width:800px) {
+    
+    .agent-container{
+
+        width: 99%;
+        height: auto;
+        margin: auto;
+        margin-top: 80px;
+        padding: 10px;
+        /* background-color: rgb(48, 48, 54); */
+    }
+    .img-div{
+        width: 80%;
+        height: auto;
+        /* background-color: aqua; */
+        margin-top: 3px;
+    }
+    .img-div img {
+
+        width: 80%;
+        height: 300px;
+    }
+}

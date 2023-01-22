@@ -1,0 +1,49 @@
+.listing-div{
+    width: 80%;
+    height: auto;
+    padding: 6px;
+    margin: auto;
+    margin-top: 40px;
+    background-color: rgb(3, 47, 83);
+    text-align: center;
+}
+.listing-div form{
+    margin: auto;
+    margin-top: 30px;
+    padding: 10px;
+    width: 80%;
+    text-align: center;
+
+}
+.listing-div form label{
+    font-size: 18px;
+    padding: 4px;
+    margin: 4px;
+    color: white;
+}
+.listing-div form input{
+    width: 70%;
+    height: 30px;
+    margin: 4px;
+    padding: 10px;
+}
+.listing-div form .price{
+    width: 130px;
+    height: 10px;
+}
+.listing-div form .contract_type{
+    width: 150px;
+    height: 40px;
+}
+.submit{
+    width: 100px;
+    height: 40px;
+    padding: 5px;
+    margin: 4px;
+}
+.description{
+    width: 70%;
+    height: 250px;
+    padding: 6px;
+
+}
