@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -8,18 +11,22 @@ from rest_framework.response import Response
 from rest_framework import permissions,status,generics,mixins
 
 from .serializers import (
-    AgentProfileSerializer,
+    AgentProfileSerializer, 
     UserSerializer,
     )
 
 from .models import AgentProfile 
  
 # all agents view 
+
 class AgentView(mixins.ListModelMixin,
                   generics.GenericAPIView):
     queryset = AgentProfile.objects.filter(is_staff=False)
     serializer_class = AgentProfileSerializer
 
+    @method_decorator(cache_page(60 * 30, key_prefix="agent_list"))
+    @method_decorator(vary_on_cookie)
+
     def get(self,request,pk=None,*args,**kwargs):
         if pk:
             profile = AgentProfile.objects.get(pk=pk)
@@ -28,12 +35,20 @@ class AgentView(mixins.ListModelMixin,
 
         serializer = self.serializer_class(profile)
         return self.list(request, *args, **kwargs)
+
 
 # home page agent display view 
+
 class AgentHomePageView(mixins.ListModelMixin,
                   generics.GenericAPIView):
+    
+   
+
     queryset = AgentProfile.objects.filter(is_staff=False)[:3]
     serializer_class = AgentProfileSerializer
+    
+    @method_decorator(cache_page(60 * 30, key_prefix="agent_home_view"))
+    @method_decorator(vary_on_cookie)
 
     def get(self,request,pk=None,*args,**kwargs):
         if pk:
@@ -43,12 +58,15 @@ class AgentHomePageView(mixins.ListModelMixin,
 
         serializer = self.serializer_class(profile)
         return self.list(request, *args, **kwargs)
+
 
 class AgentDetailView(generics.RetrieveAPIView):
     queryset = AgentProfile.objects.filter(is_staff=False)
     serializer_class = AgentProfileSerializer
     lookup_field = 'id'
     permission_classes = [permissions.AllowAny]  
+
+
 
 
 # search particular agent / agent profile view 
@@ -108,6 +126,9 @@ class UserView(APIView):
     ]
     serializer_class = UserSerializer
 
+    @method_decorator(cache_page(60 * 30, key_prefix="agent_home_view"))
+    @method_decorator(vary_on_cookie)
+    
     def get_object(self,queryset=None):
         obj = get_object_or_404(User,pk=self.kwargs['user_id'])
         return obj
@@ -139,26 +160,26 @@ class UserView(APIView):
             old_email = user.email 
             chk_email = User.objects.filter(email=email)
 
-            if first_name == " ":
-                return Response({
-                    "error": "Name can not be empty"
-                })     
-            elif last_name == " ":
-                return Response({
-                    "error": "Name can not be empty"
-                })
-            elif username == " ":
-                return Response({
-                    "error": "Username can not be empty"
-                })
-            elif username != old_username and chk_username.count():
+            # if first_name == " ":
+            #     return Response({
+            #         "error": "Name can not be empty"
+            #     })     
+            # elif last_name == " ":
+            #     return Response({
+            #         "error": "Name can not be empty"
+            #     })
+            # if username == " ":
+            #     return Response({
+            #         "error": "Username can not be empty"
+            #     })
+            if username != old_username and chk_username.count():
                 return Response({
                     "error": "Username already exists"
                 })
-            elif email == " ":
-                return Response({
-                    "error": "Email can not be empty"
-                })
+            # elif email == " ":
+            #     return Response({
+            #         "error": "Email can not be empty"
+            #     })
             elif email != old_email and chk_email.count():
                 return Response({
                     "error": "Email already exists"
@@ -185,10 +206,13 @@ class UserView(APIView):
                     obj.username=request.user
                 obj.save()       
             
-            return Response(serializer.data)
+            return Response({
+                "message":"User info updated successfully",
+                "data": serializer.data
+            })
 
         return Response({
-            'error':'unable to user information',
+            'message':'unable to user information',
             'status': status.HTTP_404_BAD_REQUEST
         })
 

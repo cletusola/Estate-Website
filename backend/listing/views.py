@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -11,6 +14,7 @@ from .serializers import ListingSerializer
 from .models import Listing 
 
 
+
 #listing
 class ListingView(mixins.ListModelMixin,
                   mixins.CreateModelMixin,
@@ -18,6 +22,9 @@ class ListingView(mixins.ListModelMixin,
     queryset = Listing.objects.all().order_by('-date')
     serializer_class = ListingSerializer 
     permission_classes = [permissions.AllowAny]
+
+    @method_decorator(cache_page(60 * 30, key_prefix="listing"))
+    @method_decorator(vary_on_cookie)
 
     def get(self,request,pk=None,*args,**kwargs):
         if pk:
@@ -33,8 +40,11 @@ class ListingView(mixins.ListModelMixin,
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             serializer.save(agent=request.user)
-            return Response(serializer.data)
-        return Response({'error':'cannot submit form'})
+            return Response({
+                "message":"listing posted successfully",
+                "data": serializer.data
+            })
+        return Response({'message':'cannot submit form'})
 
 
 # home page listing view
@@ -45,6 +55,9 @@ class HomeListingView(mixins.ListModelMixin,
     serializer_class = ListingSerializer 
     permission_classes = [permissions.AllowAny]
 
+    @method_decorator(cache_page(60 * 30, key_prefix="home_listing"))
+    @method_decorator(vary_on_cookie)
+
     def get(self,request,pk=None,*args,**kwargs):
         if pk:
             listing = Listing.objects.filter(id=pk)
@@ -60,8 +73,10 @@ class HomeListingView(mixins.ListModelMixin,
         if serializer.is_valid():
             serializer.save(agent=request.user)
             return Response(serializer.data)
-        return Response({'error':'cannot submit form'})
+        return Response({'message':'cannot submit form'})
 
+
+# listing details
 class ListingDetials(mixins.RetrieveModelMixin,
                     mixins.UpdateModelMixin,
                     mixins.DestroyModelMixin,
@@ -76,6 +91,8 @@ class ListingDetials(mixins.RetrieveModelMixin,
         else:
             return Listing.objects.all().order_by('-date')
 
+    @method_decorator(cache_page(60 * 30, key_prefix="listing_details"))
+    @method_decorator(vary_on_cookie)
 
     def get(self, request,pk=None,*args, **kwargs):
         serializer = self.serializer_class(self.get_queryset, many=True)
@@ -87,7 +104,7 @@ class ListingDetials(mixins.RetrieveModelMixin,
         listing = Listing.objects.filter(pk=pk, agent=self.request.user)
         if listing == None:
             return Response({
-                "error":"No listing to display"
+                "message":"No listing to display"
             })
         serializer = self.serializer_class(listing, data=request.data, partial=True)
         if serializer.is_valid(raise_exception=True):
@@ -98,20 +115,21 @@ class ListingDetials(mixins.RetrieveModelMixin,
             
         else:
             return Response({
-                "error": "unable to update product"
+                "message": "unable to update product"
             })
 
     def delete(self, request,pk=None, *args, **kwargs):
         listing = Listing.objects.filter(id=pk,agent=request.user)
         if listing == None:
             return Response({
-                "error":"no listing to delete"
+                "message":"no listing to delete"
             })
         
         listing.delete()
         return self.destroy(request, *args, **kwargs)
 
 
+# agent listings
 class AgentList(mixins.ListModelMixin,
                 mixins.CreateModelMixin,
                 generics.GenericAPIView):
@@ -122,6 +140,9 @@ class AgentList(mixins.ListModelMixin,
         user = self.request.user 
         return Listing.objects.filter(agent=user)
 
+    @method_decorator(cache_page(60 * 30, key_prefix="agents_listing"))
+    @method_decorator(vary_on_cookie)
+
     def get(self, request,pk=None,*args, **kwargs):
         if pk:
             listing = self.get_queryset(pk)
@@ -131,6 +152,7 @@ class AgentList(mixins.ListModelMixin,
         return self.list(request, *args, **kwargs)
 
 
+# agent listing details
 class AgentListDetails(mixins.RetrieveModelMixin,
                     mixins.UpdateModelMixin,
                     mixins.DestroyModelMixin,
@@ -141,6 +163,9 @@ class AgentListDetails(mixins.RetrieveModelMixin,
     
         user = self.request.user 
         return Listing.objects.filter(agent=user)
+
+    @method_decorator(cache_page(60 * 30, key_prefix="agent_listing_details"))
+    @method_decorator(vary_on_cookie)
 
     def get(self, request,pk=None,*args, **kwargs):
         if pk:
@@ -156,7 +181,7 @@ class AgentListDetails(mixins.RetrieveModelMixin,
             listing = Listing.objects.filter(pk=pk)
             if listing == None:
                 return Response({
-                    "error":"no listing to delete"
+                    "message":"no listing to delete"
                 })
         
             listing.delete()

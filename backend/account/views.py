@@ -92,7 +92,7 @@ class SignUpView(APIView):
                     password=password
                 )
                 return Response({
-                    'success':'User account created successfully'
+                    'message':'User account created successfully'
                 })
 
         else:
@@ -101,43 +101,6 @@ class SignUpView(APIView):
             })
 
 
-# change password view
-class ChangePassView(APIView):
-    permissions_classes = [
-        permissions.IsAuthenticated,
-    ]  
-    serializer_class = ChangePassSerializer 
-
-    def post(self,request,format=None):
-        user = User.objects.filter(username=request.user.username)
-        serializer = self.serializer_class(data=request.data)
-
-        if serializer.is_valid(raise_exception=True):
-            old_password = request.data.get('old_password')
-            new_password = request.data.get('new_password')
-            
-            if old_password != user.password:
-                return Response({
-                    "error":"old password is incorrect"
-                })
-            elif old_password == new_password:
-                return Response({
-                    "error":"old and new password can not be the same"
-                })
-
-            elif len(new_password) < 6:
-                return Response({
-                    "error":"password can not be less than 6 characters"
-                }) 
-            else:
-                pass
-            obj = user.set_password(new_password)
-            obj.save()
-            serializer.save()
-        return Response({
-            'success':'password changed successfully',
-            'data': serializer.data
-        })
 
 
 

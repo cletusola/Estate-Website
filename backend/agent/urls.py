@@ -10,7 +10,7 @@ from .views import (
     AgentProfileView,
     UpdateProfileView,
     UserView,
-    )
+    ) 
 
 urlpatterns = [
 
