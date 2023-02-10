@@ -1,4 +1,4 @@
-# RapidEstate_DRF-Reactjs
+# Estate website
 
 <h2> Estate Website </h2>
 <ul>
