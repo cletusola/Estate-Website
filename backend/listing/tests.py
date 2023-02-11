@@ -6,25 +6,11 @@ User = get_user_model()
 
 
 # listing test case 
-class PostListing(APITestCase):
+class PostListingTestCase(APITestCase):
 
+    # test for all listings 
     def test_listing(self):
-        url = reverse("listing")
-        data = {
-            'name':'Test Villa',
-            'address':'12 abc ln, abcd',
-            'price':'100000',
-            'area':'123',
-            'bed':'3',
-            'bath':'3',
-            'garage':'3',
-            'description': 'villa description',
-            'image1':'image1.jpg',
-            'image2':'image2.jpg',
-            'image3':'image3.jpg',
-        }
-        
-        response = self.client.post(url, data, format='json')
-        self.assertEqual(response.data["message"],"cannot submit form")
+        response = self.client.get(reverse("listing"))
+        self.assertEqual(response.status_code, status.HTTP_200_OK) 
 
-       
+

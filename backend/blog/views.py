@@ -15,9 +15,6 @@ class BlogListView(mixins.ListModelMixin,
     queryset = Blog.objects.filter(status='publish')
     serializer_class = BlogSerializer 
 
-    @method_decorator(cache_page(60 * 60 * 15, key_prefix="blogs"))
-    @method_decorator(vary_on_cookie)
-
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
@@ -31,9 +28,6 @@ class HomeBlogListView(mixins.ListModelMixin,
                    generics.GenericAPIView):
     queryset = Blog.objects.filter(status='publish')[:3]
     serializer_class = BlogSerializer 
-
-    @method_decorator(cache_page(60 * 60 * 15, key_prefix="home_blogs"))
-    @method_decorator(vary_on_cookie)
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -50,8 +44,6 @@ class BlogDetailView(mixins.RetrieveModelMixin,
     queryset = Blog.objects.filter(status='publish').order_by('-date')
     serializer_class = BlogSerializer 
     
-    @method_decorator(cache_page(60 * 60 * 30, key_prefix="blog_details"))
-    @method_decorator(vary_on_cookie)
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)

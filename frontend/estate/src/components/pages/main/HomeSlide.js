@@ -12,7 +12,7 @@ const slideImages = [
     caption: 'Slide 2'
   },
   {
-    url: 'images/slide2.jpg',
+    url: 'images/slide2.jpg', 
     caption: 'Slide 3'
   },
 ];

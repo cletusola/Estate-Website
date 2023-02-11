@@ -13,7 +13,7 @@ from rest_framework.authtoken.models import Token
 from .serializers import ListingSerializer
 from .models import Listing 
 
-
+ 
 
 #listing
 class ListingView(mixins.ListModelMixin,
@@ -23,14 +23,10 @@ class ListingView(mixins.ListModelMixin,
     serializer_class = ListingSerializer 
     permission_classes = [permissions.AllowAny]
 
-    @method_decorator(cache_page(60 * 30, key_prefix="listing"))
-    @method_decorator(vary_on_cookie)
 
-    def get(self,request,pk=None,*args,**kwargs):
-        if pk:
-            listing = Listing.objects.filter(id=pk)
-        else:
-            listing = Listing.objects.all().order_by('-date')
+    def get(self,request,*args,**kwargs):
+    
+        listing = Listing.objects.all().order_by('-date')
 
         serializer = self.serializer_class(listing, many=True)
         return self.list(request, *args, **kwargs)
@@ -44,36 +40,23 @@ class ListingView(mixins.ListModelMixin,
                 "message":"listing posted successfully",
                 "data": serializer.data
             })
-        return Response({'message':'cannot submit form'})
+        return Response({'message':'unable to create listing, check form for errors'})
 
 
 # home page listing view
 class HomeListingView(mixins.ListModelMixin,
-                #   mixins.CreateModelMixin,
                   generics.GenericAPIView):
     queryset = Listing.objects.all().order_by('-date')[:3]
     serializer_class = ListingSerializer 
     permission_classes = [permissions.AllowAny]
 
-    @method_decorator(cache_page(60 * 30, key_prefix="home_listing"))
-    @method_decorator(vary_on_cookie)
+ 
+    def get(self,request,*args,**kwargs):
 
-    def get(self,request,pk=None,*args,**kwargs):
-        if pk:
-            listing = Listing.objects.filter(id=pk)
-        else:
-            listing = Listing.objects.all().order_by('-date')
+        listing = Listing.objects.all().order_by('-date')
 
         serializer = self.serializer_class(listing, many=True)
         return self.list(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        permission_classes = [permissions.IsAuthenticated]
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            serializer.save(agent=request.user)
-            return Response(serializer.data)
-        return Response({'message':'cannot submit form'})
 
 
 # listing details
@@ -91,8 +74,6 @@ class ListingDetials(mixins.RetrieveModelMixin,
         else:
             return Listing.objects.all().order_by('-date')
 
-    @method_decorator(cache_page(60 * 30, key_prefix="listing_details"))
-    @method_decorator(vary_on_cookie)
 
     def get(self, request,pk=None,*args, **kwargs):
         serializer = self.serializer_class(self.get_queryset, many=True)
@@ -140,8 +121,6 @@ class AgentList(mixins.ListModelMixin,
         user = self.request.user 
         return Listing.objects.filter(agent=user)
 
-    @method_decorator(cache_page(60 * 30, key_prefix="agents_listing"))
-    @method_decorator(vary_on_cookie)
 
     def get(self, request,pk=None,*args, **kwargs):
         if pk:
@@ -164,8 +143,6 @@ class AgentListDetails(mixins.RetrieveModelMixin,
         user = self.request.user 
         return Listing.objects.filter(agent=user)
 
-    @method_decorator(cache_page(60 * 30, key_prefix="agent_listing_details"))
-    @method_decorator(vary_on_cookie)
 
     def get(self, request,pk=None,*args, **kwargs):
         if pk:

@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from .signals import *
 from .views import (
     AgentView,
-    AgentHomePageView,
+    AgentHomePageView, 
     AgentDetailView,
     AgentProfileView,
     UpdateProfileView,

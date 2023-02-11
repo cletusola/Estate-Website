@@ -7,7 +7,7 @@ from .views import BlogListView,BlogDetailView,HomeBlogListView
 urlpatterns = [
     
     path('', BlogListView.as_view(), name="blogs"),
-    path('home_display/', HomeBlogListView.as_view(), name="blogs"),
+    path('home_display/', HomeBlogListView.as_view(), name="home_blogs"),
     path('<int:pk>/', BlogDetailView.as_view(), name="blog_details"),
 ]
 if settings.DEBUG:
